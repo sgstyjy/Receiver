@@ -14,27 +14,20 @@ public class Receiver {
 	       //the start time
 	       Date date = new Date();
 	       Long starttime = date.getTime();
-	       try 
-	       {
-	          // for(;;)                          
-	           //{
-	              //waitting for the connection from client
-	              Socket socket = s.accept();
-	              //start the thread
-	              new ReceiverThread(socket);
-	              
-	              s.close();
-	              //the end time
-	              Date date1 = new Date();
-	              Long endtime = date1.getTime();
-	              Long duration = endtime-starttime;
-	              System.out.println("The receive time of is:"+duration);
-	         //  }
-	       }
-	       finally 
-	       {
-	             return;
-	       }
+	       // for(;;)                          
+		   //{
+		      //waitting for the connection from client
+		      Socket socket = s.accept();
+		      //start the thread
+		      new ReceiverThread(socket);
+		      
+		      s.close();
+		      //the end time
+		      Date date1 = new Date();
+		      Long endtime = date1.getTime();
+		      Long duration = endtime-starttime;
+		      System.out.println("The receive time of is:"+duration);
+		 //  }
 	}
 
 }
