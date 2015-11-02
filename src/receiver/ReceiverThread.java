@@ -12,21 +12,20 @@ import java.net.SocketAddress;
 public class ReceiverThread extends Thread{
 	 //File IO
     private DataInputStream sin;
-    private RandomAccessFile sout;
+    private RandomAccessFile t_sout;
     private  Long starttime = (long) 0;
-    private int getcid =0;
-    public ReceiverThread(Socket clientSocket, File file_out, int cid,  int startblock, int totalblock) throws IOException 
+    private int t_cid =0;
+    public ReceiverThread(Socket clientSocket,  int cid,  int startblock, int totalblock) throws IOException 
     {      
     	   // long tid =   this.getId();
             //System.out.println("The thread id is: "+ tid);
-    	    getcid = cid;
+    	    t_cid = cid;
             sin = new DataInputStream(clientSocket.getInputStream());
-            sout = new RandomAccessFile(Constant.FILE_IN,"rw");
-            sout.seek(startblock);
+            t_sout = new RandomAccessFile(Constant.FILE_IN,"rw");
+            t_sout.seek(startblock);
            //start thread
           starttime = System.currentTimeMillis();
            start(); 
-          
     }
     //the thread main method
     public void run() 
@@ -39,16 +38,16 @@ public class ReceiverThread extends Thread{
         {
            receive_length = sin.read(bb);
            while(receive_length!=-1){
-        	   sout.write(bb, 0, receive_length);
+        	   t_sout.write(bb, 0, receive_length);
         	   //sout2.write(b);
         	   receive_blocks++;
         	   receive_length = sin.read(bb);
            }   
            Long endtime = System.currentTimeMillis();
            Long duration = endtime - starttime;
-           System.out.println("The Client" + getcid + "'s transfer time is: " + duration);
+           System.out.println("The Client" + t_cid + "'s transfer time is: " + duration);
            sin.close();
-           sout.close();
+          // t_sout.close();
            System.out.println("The blocks received are: "+receive_blocks);
          } catch (IOException e) {
              e.printStackTrace();
