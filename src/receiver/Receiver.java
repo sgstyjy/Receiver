@@ -1,5 +1,6 @@
 package receiver;
 
+import java.io.DataInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -15,11 +16,19 @@ public class Receiver {
 	       ServerSocket s = new ServerSocket(Constant.PORT);
 	       System.out.println("The outputs are from the Server: ");    
 	       File received_file = new File("newVM.qcow2");
-
+	       
 	       while(true)
 		   {
 		      Socket socket = s.accept();
-		     new ReceiverThread(socket, received_file);		      
+		      //receive the basic information: client id, the start block, the total block.
+		      DataInputStream  sin = new DataInputStream(socket.getInputStream());
+		      int cid = sin.readInt();
+		      int startblock = sin.readInt();
+		      int totalblock = sin.readInt();
+		      System.out.println("The client ID is : "+ cid);    
+		      System.out.println("The start block is: "+ startblock);    
+		      System.out.println("The total block is: "+totalblock);    
+		     new ReceiverThread(socket, received_file, startblock, totalblock);		      
 		      s.close();
 		    }
 	}
