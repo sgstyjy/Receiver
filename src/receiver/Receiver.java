@@ -21,22 +21,23 @@ public class Receiver {
 	         //receive the basic information: client id, the start block, the total block.
 		      DataInputStream  sin = new DataInputStream(socket.getInputStream());
 		      int cid = sin.readInt();
+		      int total_block = sin.readInt();
 		      int startblock = sin.readInt();
-		      int totalblock = sin.readInt();
+		      int send_block = sin.readInt();
 		      Constant.FILE_IN = sin.readUTF();
 		      System.out.println("The client ID is : "+ cid);    
+		      System.out.println("The total block is: "+total_block);    
 		      System.out.println("The start block is: "+ startblock);    
-		      System.out.println("The total block is: "+totalblock);    
+		      System.out.println("The send block is: "+send_block);    
 	          RandomAccessFile init = new RandomAccessFile(Constant.FILE_IN,"rw");
 	         byte[] bb = new byte[4*1024];
-		      int i =0;
-		      for( i = 0; i<4; i++)
+		      for( int i = 0; i<total_block; i++)
 		    	   init.write(bb);
-            
+            init.close();
 	       while(true)
 		   {
+		         new ReceiverThread(socket, cid, startblock, send_block);	
 		         socket = s.accept();
-		         new ReceiverThread(socket, cid, startblock, totalblock);		      
 		    }
 	}
 }

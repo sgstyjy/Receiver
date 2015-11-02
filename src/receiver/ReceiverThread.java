@@ -12,17 +12,17 @@ import java.net.SocketAddress;
 public class ReceiverThread extends Thread{
 	 //File IO
     private DataInputStream sin;
-    private RandomAccessFile t_sout;
+    private RandomAccessFile sout;
     private  Long starttime = (long) 0;
     private int t_cid =0;
-    public ReceiverThread(Socket clientSocket,  int cid,  int startblock, int totalblock) throws IOException 
+    public ReceiverThread(Socket clientSocket, int cid, int startblock, int send_block) throws IOException 
     {      
     	   // long tid =   this.getId();
             //System.out.println("The thread id is: "+ tid);
     	    t_cid = cid;
             sin = new DataInputStream(clientSocket.getInputStream());
-            t_sout = new RandomAccessFile(Constant.FILE_IN,"rw");
-            t_sout.seek(startblock);
+            sout = new RandomAccessFile(Constant.FILE_IN,"rw");
+            sout.seek(startblock);
            //start thread
           starttime = System.currentTimeMillis();
            start(); 
@@ -38,9 +38,8 @@ public class ReceiverThread extends Thread{
         {
            receive_length = sin.read(bb);
            while(receive_length!=-1){
-        	   t_sout.write(bb, 0, receive_length);
-        	   //sout2.write(b);
         	   receive_blocks++;
+        	   sout.write(bb, 0, receive_length);
         	   receive_length = sin.read(bb);
            }   
            Long endtime = System.currentTimeMillis();
