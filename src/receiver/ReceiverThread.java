@@ -13,19 +13,20 @@ public class ReceiverThread extends Thread{
 	 //File IO
     private DataInputStream sin;
     private RandomAccessFile sout;
-    public ReceiverThread(Socket clientSocket, File file_out, int startblock, int totalblock) throws IOException 
+    private  Long starttime = (long) 0;
+    private int getcid =0;
+    public ReceiverThread(Socket clientSocket, File file_out, int cid,  int startblock, int totalblock) throws IOException 
     {      
-    	    long tid =   this.getId();
-            System.out.println("The thread id is: "+ tid);
+    	   // long tid =   this.getId();
+            //System.out.println("The thread id is: "+ tid);
+    	    getcid = cid;
             sin = new DataInputStream(clientSocket.getInputStream());
-            sout = new RandomAccessFile(Constant.FILE_IN,"w");
+            sout = new RandomAccessFile(Constant.FILE_IN,"rw");
             sout.seek(startblock);
            //start thread
-           Long starttime = System.currentTimeMillis();
+          starttime = System.currentTimeMillis();
            start(); 
-           Long endtime = System.currentTimeMillis();
-           Long duration = endtime - starttime;
-           System.out.println("The Client" + tid + "'s transfer time is: " + duration);
+          
     }
     //the thread main method
     public void run() 
@@ -43,6 +44,9 @@ public class ReceiverThread extends Thread{
         	   receive_blocks++;
         	   receive_length = sin.read(bb);
            }   
+           Long endtime = System.currentTimeMillis();
+           Long duration = endtime - starttime;
+           System.out.println("The Client" + getcid + "'s transfer time is: " + duration);
            sin.close();
            sout.close();
            System.out.println("The blocks received are: "+receive_blocks);

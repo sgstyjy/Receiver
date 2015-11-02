@@ -28,7 +28,7 @@ public class Receiver {
 		      System.out.println("The client ID is : "+ cid);    
 		      System.out.println("The start block is: "+ startblock);    
 		      System.out.println("The total block is: "+totalblock);    
-		     new ReceiverThread(socket, received_file, startblock, totalblock);		      
+		     new ReceiverThread(socket, received_file, cid, startblock, totalblock);		      
 		      s.close();
 		    }
 	}
