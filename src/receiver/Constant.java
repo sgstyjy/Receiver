@@ -3,10 +3,7 @@ package receiver;
 public class Constant {
 	public static String FILE_IN = "ubuntu12server.qcow2";
 	public static String FILE_OUT = "receivedimage.qcow2";
-	//public static String FILE_IN = "test.txt";
-	//public static String FILE_OUT = "testresult.txt";
-	//public static String FILE_IN = "test.zip";
-	//public static String FILE_OUT = "testresult.zip";
+	public static int CID = 0;
 	public static String BLOCKNUM_OUT = "blocknum.txt";
 	public static String COMPARE_U12_U14WEB = "com_u12_u14web_4k.xls";
 	public static String COMPARE_U14DEV_U14WEB = "com_u14dev_u14web_4k.xls";
