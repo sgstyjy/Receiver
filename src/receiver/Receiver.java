@@ -1,13 +1,9 @@
 package receiver;
 
 import java.io.DataInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Date;
-import java.util.logging.SocketHandler;
 
 public class Receiver {
 
@@ -16,13 +12,6 @@ public class Receiver {
 		  //System.setProperty("java.net.preferIPv4Stack", "true");
 	       ServerSocket s = new ServerSocket(Constant.PORT);
 	       System.out.println("The outputs are from the Server: ");               
-		      /*
-	          RandomAccessFile init = new RandomAccessFile(Constant.FILE_IN,"rw");
-	         byte[] bb = new byte[4*1024];
-		      for( int i = 0; i<total_block; i++)
-		    	   init.write(bb);
-            init.close();
-            */
 	       Socket socket = s.accept();
 	       while(true)
 		   {

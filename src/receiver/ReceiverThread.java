@@ -24,15 +24,17 @@ public class ReceiverThread extends Thread{
     	    t_cid = cid;
     	    send_blocks = send_block;
     	    //construct the file name of output
+    	    /*
 		      StringBuilder strbuilder = new StringBuilder();
 			  String fileintype = Constant.FILE_IN.split("\\.")[1];    //cannot use point directly, must use "\\" before it
 			  strbuilder.append(cid);
 			  strbuilder.append("."+fileintype);
 			  Constant.FILE_OUT = strbuilder.toString();
 			  System.out.println("The saved file  is: "+Constant.FILE_OUT);
+			  */
 			  start_position = startblock;
             sin = new DataInputStream(clientSocket.getInputStream());
-            sout = new RandomAccessFile(Constant.FILE_IN,"rw");
+            sout = new RandomAccessFile(Constant.FILE_OUT,"rw");
            
            //start thread
           starttime = System.currentTimeMillis();
