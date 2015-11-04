@@ -21,7 +21,7 @@ public class Receiver {
 			      long last_bytes = sin.readLong();
 			      int start_block = sin.readInt();
 			      int send_block = sin.readInt();
-			     // Constant.FILE_IN = sin.readUTF();
+			      Constant.FILE_IN = sin.readUTF();
 			      System.out.println("The client ID is : "+ Constant.CID);    
 			      System.out.println("The start block is: "+ start_block);    
 			      System.out.println("The send block is: "+send_block);    
