@@ -26,7 +26,9 @@ public class Receiver {
 			      Constant.FILE_IN = sin.readUTF();
 			      System.out.println("The client ID is : "+ Constant.CID);    
 			      System.out.println("The start block is: "+ start_block);    
-			      System.out.println("The send block is: "+send_block);    
+			      System.out.println("The send block is: "+send_block);   
+			      System.out.println("The send times is: "+ send_times);    
+			      System.out.println("The last bytes are: "+last_bytes);  
 			      //System.out.println("The original file name is: "+Constant.FILE_IN);  
 		         new ReceiverThread(socket, Constant.CID, start_block, send_times, last_bytes);	
 		         //System.out.println("The timeout  is:  " + socket.getSoTimeout());

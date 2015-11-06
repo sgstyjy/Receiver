@@ -59,10 +59,14 @@ public class ReceiverThread extends Thread{
            }   
             //write the last part of data in the buffer
             sout.write(rb, 0, (int)last_bytes);
+           // System.out.println("The send times in thread is: "+ send_times);    
+		   //  System.out.println("The last bytes in thread are: "+(int)last_bytes);  
+            System.out.println("The received times are: "+i);  
            Long endtime = System.currentTimeMillis();
            Long duration = endtime - starttime;
            System.out.println("The Client " + t_cid + "'s transfer time is: " + duration);
            sin.close();
+           
            //System.out.println("The blocks received are: "+i);
           // System.out.println("The last block are: "+last_bytes);
          } catch (IOException e) {
