@@ -12,9 +12,11 @@ public class Receiver {
 		   //System.setProperty("java.net.preferIPv4Stack", "true");
 	       ServerSocket s = new ServerSocket(Constant.PORT);
 	       System.out.println("The outputs are from the Server: ");               
-	       Socket socket = s.accept();
+	       //System.out.println("The timeout  is:  " + socket.getSoTimeout());
 	       while(true)
 		   {
+	    	     Socket socket = s.accept();
+		         //s.setSoTimeout(10000000);
 	    	      //receive the basic information: client id, the start block, the total block.
 			      DataInputStream  sin = new DataInputStream(socket.getInputStream());
 			      int send_times = sin.readInt();
@@ -27,8 +29,9 @@ public class Receiver {
 			      System.out.println("The send block is: "+send_block);    
 			      //System.out.println("The original file name is: "+Constant.FILE_IN);  
 		         new ReceiverThread(socket, Constant.CID, start_block, send_times, last_bytes);	
-		         socket = s.accept();
+		         //System.out.println("The timeout  is:  " + socket.getSoTimeout());
 		         Constant.CID++;
 		    }
+	       
 	}
 }
