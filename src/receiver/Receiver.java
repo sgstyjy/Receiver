@@ -16,8 +16,7 @@ public class Receiver {
 	       while(true)
 		   {
 	    	     Socket socket = s.accept();
-		         //s.setSoTimeout(10000000);
-	    	      //receive the basic information: client id, the start block, the total block.
+	    	      //receive the basic information: the start block, the total block.
 			      DataInputStream  sin = new DataInputStream(socket.getInputStream());
 			      int send_times = sin.readInt();
 			      long last_bytes = sin.readLong();
@@ -30,7 +29,7 @@ public class Receiver {
 			      System.out.println("The send times is: "+ send_times);    
 			      System.out.println("The last bytes are: "+last_bytes);  
 			      //System.out.println("The original file name is: "+Constant.FILE_IN);  
-		         new ReceiverThread(socket, Constant.CID, start_block, send_times, last_bytes);	
+		         new ReceiverThread(socket, Constant.CID, start_block);	
 		         //System.out.println("The timeout  is:  " + socket.getSoTimeout());
 		         Constant.CID++;
 		    }
