@@ -11,7 +11,10 @@ public class Receiver {
 	       //server socket
 		   //build a manage socket to receive the layer information, and generate thread to receive data
 	       ServerSocket manager = new ServerSocket(Constant.MPORT);
-	             
+	       ServerSocket os_socket = new ServerSocket(Constant.OSPORT);
+	       ServerSocket we_socket = new ServerSocket(Constant.WEPORT);
+	       ServerSocket ud_socket = new ServerSocket(Constant.UDPORT);
+	       
 	       System.out.println("The outputs are from the Server: ");  
 	       int i = 0;
 	       while(true)
@@ -26,23 +29,18 @@ public class Receiver {
 		       
 		       if(total_layer == 2)
 		       {
-		    	   ServerSocket we_socket = new ServerSocket(Constant.WEPORT);
-			       ServerSocket ud_socket = new ServerSocket(Constant.UDPORT);
 		    	   new ReceiverThread(we_socket,1);
 		    	   new ReceiverThread(ud_socket,2);
 		       }
 		       if(total_layer ==3)
-		       {
-		    	   ServerSocket os_socket = new ServerSocket(Constant.OSPORT);
-			       ServerSocket we_socket = new ServerSocket(Constant.WEPORT);
-			       ServerSocket ud_socket = new ServerSocket(Constant.UDPORT);
+		       {    	   
 		    	   new ReceiverThread(os_socket,0);
 		    	   new ReceiverThread(we_socket,1);
 		    	   new ReceiverThread(ud_socket,2);
 		       }
 		       	  
 	    	   i++;
-	    	   System.out.println("The " + i +"th thread is built.");
+	    	   System.out.println("The " + i +"th client is connected.");
 	       }
 	}
 }
