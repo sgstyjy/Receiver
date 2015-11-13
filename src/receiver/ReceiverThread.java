@@ -19,7 +19,7 @@ public class ReceiverThread extends Thread{
     {      
     	    Socket socket = serverSocket.accept();
     	    System.out.println("This in thread."); 
-    	    System.out.println("The server port is:"+socket.getLocalPort());
+    	    //System.out.println("The server port is:"+socket.getLocalPort());
 			//receive the basic information: the start block, the total send block, the file name
     	    sin = new DataInputStream(socket.getInputStream());
 			int start_block = sin.readInt();
