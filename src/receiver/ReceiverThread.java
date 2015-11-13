@@ -37,16 +37,19 @@ public class ReceiverThread extends Thread{
 			{
 				strbuilder.append("OS");
 				t_cid = Constant.OS_CID++;
+				break;
 			}
 			case 1: 
 			{
 				strbuilder.append("WE");
 				t_cid = Constant.WE_CID++;
+				break;
 			}
 			case 2: 
 			{
 				strbuilder.append("UD");
 				t_cid = Constant.UD_CID++;
+				break;
 			}
 			}
 			strbuilder.append("."+fileintype);
