@@ -7,7 +7,7 @@ import java.net.Socket;
 
 public class Receiver {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 	       //server socket
 		   //build a manage socket to receive the layer information, and generate thread to receive data
 	       ServerSocket manager = new ServerSocket(Constant.MPORT);
@@ -26,17 +26,24 @@ public class Receiver {
 		       int total_layer = min.readInt();
 
 		       //build a new thread to received data
+		       if(total_layer == 1)
+		       {
+		    	   System.out.println("The total layer is: 1." );
+		    	   Thread os_thread = new ReceiverThread(os_socket,0);
+		       }
 		       
 		       if(total_layer == 2)
 		       {
-		    	   new ReceiverThread(we_socket,1);
-		    	   new ReceiverThread(ud_socket,2);
+		    	   System.out.println("The total layer is: 2." );
+		    	   Thread we_thread = new ReceiverThread(we_socket,1);
+		    	   Thread ud_thread = new ReceiverThread(ud_socket,2);
 		       }
 		       if(total_layer ==3)
 		       {    	   
-		    	   new ReceiverThread(os_socket,0);
-		    	   new ReceiverThread(we_socket,1);
-		    	   new ReceiverThread(ud_socket,2);
+		    	   System.out.println("The total layer is: 3." );
+		    	   Thread os_thread = new ReceiverThread(os_socket,0);
+		    	   Thread we_thread = new ReceiverThread(we_socket,1);
+		    	   Thread ud_thread = new ReceiverThread(ud_socket,2);
 		       }
 		       	  
 	    	   i++;
