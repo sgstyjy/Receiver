@@ -24,7 +24,14 @@ public class Receiver {
 	    	   //System.out.println("The server manager socket port is:"+m_socket.getLocalPort());
 		       DataInputStream  min = new DataInputStream(m_socket.getInputStream());
 		       int total_layer = min.readInt();
-
+		       
+		       //stop server socket
+		       if(total_layer ==0 )
+		       {
+		    	   m_socket.close();
+		    	   System.out.println("Finished VM migration!" );
+		    	   return;
+		       }
 		       //build a new thread to received data
 		       if(total_layer == 1)
 		       {
